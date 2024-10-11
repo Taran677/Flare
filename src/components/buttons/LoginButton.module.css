@@ -1,0 +1,24 @@
+.loginButton {
+    display: flex;
+    flex: 1 1 1;
+    background: #00000000;
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
+    border-radius: 0.5rem;
+    border: 0;
+    background: var(--login-button-bg);
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: var(--primary-btn-color);
+    transition:  background 0.24s ease-out, box-shadow 0.1s ease;
+    border: 0.1rem solid var(--theme-invert-90-color);
+    color: var(--theme-invert-90-color);
+    box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
+
+}
+
+.loginButton:hover {
+    background: var(--login-button-bg-hover);
+    cursor: pointer;
+}

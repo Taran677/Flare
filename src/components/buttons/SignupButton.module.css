@@ -1,0 +1,22 @@
+.SignupButton {
+    display: flex;
+    flex: 1 1 1;
+    background: #00000000;
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
+    border-radius: 0.5rem;
+    border: 0;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: var(--primary-color);
+    transition: background 0.25s ease, color 0.15s ease-in-out, box-shadow 0.1s ease;
+    border: 0.1rem solid var(--login-button-bg);
+    box-shadow: 0 0.3rem 0rem var(--login-button-bg);
+}
+
+.SignupButton:hover {
+    color: var(--login-button-bg);
+    cursor: pointer;
+    background: var(--theme-off-color);
+}

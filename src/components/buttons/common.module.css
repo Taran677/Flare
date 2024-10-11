@@ -1,0 +1,10 @@
+.loginButton:active,
+.SignupButton:active {
+    box-shadow: unset;
+    transform: translateY(0.3rem);
+}
+
+.loginButton:active {
+    color: var(--login-button-bg);
+    background: var(--theme-invert-90-color);
+}
