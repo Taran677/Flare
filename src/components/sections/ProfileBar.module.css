@@ -1,4 +1,4 @@
-.loginButton {
+.profileIcon {
     display: flex;
     flex: 1 1 1;
     background: #00000000;
@@ -17,7 +17,16 @@
     box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
 }
 
-.loginButton:hover {
+.profileIcon:hover {
     background: var(--login-button-bg-hover);
     cursor: pointer;
+}
+
+
+.profileIcon:active {
+    color: var(--login-button-bg);
+    background: var(--theme-invert-90-color) !important;
+    box-shadow: unset;
+    transform: translateY(0.3rem);
+
 }

@@ -10,7 +10,7 @@
     font-weight: inherit;
     font-size: inherit;
     color: var(--primary-color);
-    transition: background 0.25s ease, color 0.15s ease-in-out, box-shadow 0.1s ease;
+    transition: background 0.14s ease, color 0.15s ease-in-out, box-shadow 0.1s ease;
     border: 0.1rem solid var(--login-button-bg);
     box-shadow: 0 0.3rem 0rem var(--login-button-bg);
 }

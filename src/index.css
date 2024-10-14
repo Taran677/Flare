@@ -3,3 +3,7 @@
     background: var(--login-button-bg);
     color: var(--theme-off-color);
 }
+
+#root{
+    padding-inline: 2rem;
+}

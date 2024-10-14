@@ -7,9 +7,13 @@
 :root {
     --text-primary: #000;
     --text-primary-hover: #219ebc;
+    --text-secondary-hover: #69bce2b7;
     --login-button-bg: #8ecae6;
     --login-button-bg-hover: #69bce2;
     --primary-btn-color: #fff;
     --theme-invert-90-color: #003049;
     --theme-off-color: #e8f8ff;
+    --hero-bg-light: #fb8500;
+    --primary-fancy-text: #1d1d1d;
+    --accent-color: #ffb703;
 }

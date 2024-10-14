@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    padding: 1rem 3rem;
+    font-family: "Raleway", serif;
+    margin-block: 1rem;
+}
+
+.navMain,
+.navRegister {
+    display: flex;
+    align-items: center;
+}
+
+.navMain {
+    flex-basis: 60%;
+    flex: 60% 1 1;
+    justify-content: start;
+}
+
+.navRegister {
+    flex: 40% 0 1;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.navItem {
+    display: flex;
+    color: var(--text-primary);
+    font-weight: 450;
+    transition: 0.3s ease;
+}
+
+.navMain .navItem:hover {
+    color: var(--text-primary-hover);
+    border-bottom: var(--text-primary-hover) 0.1rem solid;
+}
+
+.navLink {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
+}
