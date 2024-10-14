@@ -6,10 +6,10 @@ import Hero from "./components/sections/Hero";
 import Navbar from "./components/sections/Navbar";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <>
-      <Navbar isLogin={isLogin}></Navbar>
+      <Navbar isLogin={isLogin} setIsLogin={setIsLogin}></Navbar>
       <Hero isLogin={isLogin}></Hero>
     </>
   );

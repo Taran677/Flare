@@ -4,7 +4,8 @@ import styles from "./common.module.css";
 export default function SignupButton() {
   return (
     <button className={`${css.SignupButton} ${styles.SignupButton}`} id="signupbtn">
-      Signup
+      Signup <i class="fas fa-user-plus"></i>
+
     </button>
   );
 }

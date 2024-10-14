@@ -15,6 +15,8 @@
     border: 0.1rem solid var(--theme-invert-90-color);
     color: var(--theme-invert-90-color);
     box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
+    align-items: center;
+    gap: 0.3rem;
 }
 
 .loginButton:hover {

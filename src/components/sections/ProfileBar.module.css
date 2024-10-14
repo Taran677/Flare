@@ -6,7 +6,7 @@
     padding-block: 1rem;
     border-radius: 0.5rem;
     border: 0;
-    background: var(--login-button-bg);
+    background: var(--accent-color);
     font-family: inherit;
     font-weight: inherit;
     font-size: inherit;
@@ -15,16 +15,18 @@
     border: 0.1rem solid var(--theme-invert-90-color);
     color: var(--theme-invert-90-color);
     box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
+    align-items: center;
+    gap: 0.3rem;
 }
 
 .profileIcon:hover {
-    background: var(--login-button-bg-hover);
+    background: var(--hero-bg-light);
     cursor: pointer;
 }
 
 
 .profileIcon:active {
-    color: var(--login-button-bg);
+    color: var(--hero-bg-light);
     background: var(--theme-invert-90-color) !important;
     box-shadow: unset;
     transform: translateY(0.3rem);

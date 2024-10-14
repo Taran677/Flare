@@ -17,3 +17,8 @@
     --primary-fancy-text: #1d1d1d;
     --accent-color: #ffb703;
 }
+@media screen and (max-width: 576px) {
+    #root{
+        font-size: 85%;
+    }
+}
