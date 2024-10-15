@@ -110,7 +110,7 @@
     .loginDiv {
         width: 100%;
         grid-template-columns: 25% 25% 25% 25%;
-        grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12%;
+        grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12%;
     }
 
     .welcomeBackTo {
@@ -142,10 +142,11 @@
 
     .loginDiv {
         padding-inline: 0.5rem !important;
-
     }
 
-    .SignUp {
-        padding-bottom: 5rem;
+    .SignUp{
+        grid-row: span 3;
+        justify-content: flex-start;
+        padding-top: 2rem;
     }
 }
