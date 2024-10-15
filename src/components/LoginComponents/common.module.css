@@ -160,6 +160,18 @@
         object-fit: contain;
         align-self: center;
     }
+    .form1, .form2{
+        width: 15rem;
+    }
+}
+@media screen and (max-width: 675px) {
+    .SignupDiv{
+        flex-direction: column-reverse;
+    }
+    .ipods{
+        max-width: 90%;
+        transform: unset;
+    }
 }
 
 @media screen and (max-width: 576px) {
