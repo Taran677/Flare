@@ -1,0 +1,49 @@
+.username{
+    color: var(--accent-color);
+}
+
+.card1{
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr;
+    max-height: 80vh;
+}
+
+.card1:hover{
+    background: var(--accent-color-20);
+}
+
+.illus{
+    min-height: 100%;
+    border-radius: 0.5rem;
+}
+
+.illusParent{
+    grid-row: span 2;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.mainHead{
+    font-size: 3rem;
+    width: 100%;
+    text-align: start;
+}
+
+@media screen and (max-width: 576px) {
+    .card1{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 3fr;
+    }
+    .illus{
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 992px){
+    .card1{
+        height: 40vh;
+        grid-template-columns: 1fr 3fr;
+    }
+    
+}

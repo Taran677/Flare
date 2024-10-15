@@ -51,7 +51,7 @@
 }
 
 .learnMore {
-    background: #00000000;
+    background: var(--hero-bg-light);
     cursor: pointer;
 }
 
@@ -61,4 +61,11 @@
 
 .learnMore:active{
     color: var(--accent-color);
+}
+
+.loginButton, .SignupButton{
+    justify-content: center;
+ 
+    align-self: stretch;
+    justify-self: stretch;
 }

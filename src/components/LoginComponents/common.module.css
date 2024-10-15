@@ -1,0 +1,134 @@
+.loginDiv {
+    display: grid;
+    padding-inline: 4rem;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12%;
+    max-width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    font-family: "Raleway", serif;
+}
+
+.form,
+.SignUp {
+    display: flex;
+    padding-inline: 5rem;
+    grid-row: span 3;
+    grid-column: span 4;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+.campingIllus {
+    grid-row: span 4;
+    grid-column: span 4;
+    max-width: 100%;
+    max-height: 100%;
+    flex-wrap: wrap;
+    object-fit: contain;
+    scale: 1.5;
+    image-rendering: optimizeQuality;
+    overflow: hidden;
+    translate: 10rem;
+}
+
+
+
+.logo {
+    height: 60%;
+    object-fit: contain;
+}
+
+.mainHead {
+    align-items: first baseline !important;
+    font-family: 'Playwrite GB S', cursive;
+}
+
+.welcomeBackTo, .welcombackto2,
+.mainHead,
+.loginHead {
+    grid-column: span 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.welcombackto2{
+    display: none;
+}
+.loginHead {
+    color: var(--theme-invert-90-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.input {
+    box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: '';
+}
+
+.SignUp {
+    grid-row: span 2;
+}
+
+.form {
+    grid-row: span 4;
+}
+
+@media screen and (max-width: 1259px) {
+
+    .SignUp,
+    .form {
+        padding-left: 1rem;
+    }
+
+    .campingIllus {
+        translate: 7vw;
+    }
+}
+
+@media screen and (max-width: 1009px) {
+
+    .SignUp,
+    .form {
+        padding: 0rem;
+    }
+
+    .campingIllus {
+        scale: 1;
+        translate: 0;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .loginDiv {
+        width: 100%;
+        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12%;
+    }
+    .welcomeBackTo{
+        display: none;
+    }
+    .welcombackto2, .mainHead{
+        grid-column: span 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .campingIllus{
+        grid-row: span 6;
+        grid-column: span 4 !important;
+        width: 100%;
+        object-fit: contain;
+        align-self: center;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .campingIllus{
+        grid-row: span 3;    }
+}

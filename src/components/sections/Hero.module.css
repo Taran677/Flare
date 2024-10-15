@@ -80,7 +80,32 @@
     font-size: 2.5rem;
 }
 
+.loginHero{
+    font-family: "Raleway", serif;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 01rem;
+}
+.loginHero>nav{
+    flex: 20% 1 0;
+}
+.loginHero>div{
+    flex: 80% 1 3;
+    width: auto;
+    
+}
 
+.loginMainHead{
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--secondary-heading-color);
+
+}
+
+.username{
+    color: var(--accent-color);
+}
 
 @media screen and (max-width: 1048px) {
     .hero {

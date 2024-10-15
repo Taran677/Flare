@@ -3,6 +3,7 @@ import LoginButton from "../buttons/LoginButton";
 import SignupButton from "../buttons/SignupButton";
 import css from "./Navbar.module.css";
 import ProfileBar from "./ProfileBar";
+import { Link } from "react-router-dom";
 
 export default function Navbar({ isLogin, setIsLogin }) {
   const [menuDisplay, setMenuDisplay] = useState(true);
@@ -23,9 +24,9 @@ export default function Navbar({ isLogin, setIsLogin }) {
         {menuDisplay && (
           <ul className={css.navMain}>
             <li className={css.navItem}>
-              <a href="#" className={css.navLink}>
+              <Link to="/" className={css.navLink}>
                 Home
-              </a>
+              </Link>
             </li>
 
             <li className={css.navItem}>

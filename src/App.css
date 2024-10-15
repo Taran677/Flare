@@ -7,7 +7,7 @@
 :root {
     --text-primary: #000;
     --text-primary-hover: #219ebc;
-    --text-secondary-hover: #69bce2b7;
+    --text-secondary-hover: #ffaf2f;
     --login-button-bg: #8ecae6;
     --login-button-bg-hover: #69bce2;
     --primary-btn-color: #fff;
@@ -16,9 +16,12 @@
     --hero-bg-light: #fb8500;
     --primary-fancy-text: #1d1d1d;
     --accent-color: #ffb703;
+    --accent-color-20: #ffb80335;
+    --secondary-heading-color: #7c7c7c;
 }
+
 @media screen and (max-width: 576px) {
-    #root{
+    #root {
         font-size: 85%;
     }
 }
