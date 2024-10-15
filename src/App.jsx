@@ -6,6 +6,7 @@ import profile from "./assets/profileDefault.svg";
 import Hero from "./components/sections/Hero";
 import Navbar from "./components/sections/Navbar";
 import Login from "./components/LoginComponents/Login";
+import Signup from "./components/LoginComponents/Signup";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </Router>

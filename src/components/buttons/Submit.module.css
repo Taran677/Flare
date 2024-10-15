@@ -1,0 +1,21 @@
+.submit {
+    box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
+    background: var(--login-button-bg-hover);
+    border-radius: 0.5rem;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    border: 0.1rem solid var(--theme-invert-90-color);
+    padding: 1rem 1.2rem;
+    font-family: "Playwrite GB S", cursive;
+}
+
+.submit:hover {
+    background-color: var(--text-primary-hover);
+}
+
+.submit:active {
+    background: var(--theme-invert-90-color);
+    color: var(--login-button-bg-hover);
+    transform: translateY(0.3rem);
+    box-shadow: unset;
+}

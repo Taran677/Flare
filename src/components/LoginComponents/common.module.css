@@ -7,6 +7,7 @@
     min-height: 100vh;
     max-height: 100vh;
     font-family: "Raleway", serif;
+
 }
 
 .form,
@@ -30,7 +31,8 @@
     scale: 1.5;
     image-rendering: optimizeQuality;
     overflow: hidden;
-    translate: 10rem;
+    translate: 11rem;
+    z-index: -1;
 }
 
 
@@ -75,10 +77,35 @@
 
 .SignUp {
     grid-row: span 2;
+    z-index: 12;
 }
 
 .form {
     grid-row: span 4;
+}
+
+.form1, .form2 {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    gap: 1rem;
+}
+
+.SignupDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form1 label, .form2 label{
+    display: flex;
+    gap: 0.2rem;
+    flex-direction: column;
+}
+
+.ipods{
+    max-width: 25rem;
+    transform: translateY(15vh)    ;
 }
 
 @media screen and (max-width: 1259px) {
@@ -144,7 +171,7 @@
         padding-inline: 0.5rem !important;
     }
 
-    .SignUp{
+    .SignUp {
         grid-row: span 3;
         justify-content: flex-start;
         padding-top: 2rem;
