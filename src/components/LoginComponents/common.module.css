@@ -142,5 +142,6 @@
 
     .loginDiv {
         padding-inline: 0.5rem !important;
+        padding-bottom: 5rem;
     }
 }
