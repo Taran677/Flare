@@ -45,7 +45,8 @@
     font-family: 'Playwrite GB S', cursive;
 }
 
-.welcomeBackTo, .welcombackto2,
+.welcomeBackTo,
+.welcombackto2,
 .mainHead,
 .loginHead {
     grid-column: span 4;
@@ -53,9 +54,11 @@
     align-items: center;
     justify-content: center;
 }
-.welcombackto2{
+
+.welcombackto2 {
     display: none;
 }
+
 .loginHead {
     color: var(--theme-invert-90-color);
     display: flex;
@@ -109,17 +112,21 @@
         grid-template-columns: 25% 25% 25% 25%;
         grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12%;
     }
-    .welcomeBackTo{
+
+    .welcomeBackTo {
         display: none;
     }
-    .welcombackto2, .mainHead{
+
+    .welcombackto2,
+    .mainHead {
         grid-column: span 4;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
     }
-    .campingIllus{
+
+    .campingIllus {
         grid-row: span 6;
         grid-column: span 4 !important;
         width: 100%;
@@ -129,6 +136,11 @@
 }
 
 @media screen and (max-width: 576px) {
-    .campingIllus{
-        grid-row: span 3;    }
+    .campingIllus {
+        grid-row: span 3;
+    }
+
+    .loginDiv {
+        padding-inline: 0.5rem !important;
+    }
 }
