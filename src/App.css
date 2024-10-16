@@ -26,6 +26,40 @@
     }
 }
 
-label{
+label {
     font-family: "Playwrite GB S", cursive;
+}
+
+/* swweet alert classes visit https://sweetalert.js.org/docs/#theming for docs! */
+
+.swal-modal {
+    border-radius: 0.5rem;
+    border: solid 0.1rem var(--theme-invert-90-color);
+}
+
+.swal-text {
+    font-family: "Raleway", serif;
+}
+
+.swal-title {
+    font-family: "Playwrite GB S", cursive;
+}
+
+.swal-button, .swal-button:focus {
+    box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
+    color: var(--theme-invert-90-color);
+    font-family: "Playwrite GB S", cursive;
+    font-size: 1rem;
+    border: 0.1rem solid var(--theme-invert-90-color);
+    transition: translate 0.2s ease-out, background 0.1s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.swal-button:hover {
+    box-shadow: 0 0.1rem 0 var(--theme-invert-90-color);
+    transform: translateY(0.3rem);
+}
+
+.swal-button:active {
+    color: var(--login-button-bg-hover);
+    background: var(--theme-invert-90-color) !important ;
 }

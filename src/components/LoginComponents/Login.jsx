@@ -2,17 +2,40 @@ import React, { useState } from "react";
 import css from "./common.module.css";
 import LoginButton from "../buttons/LoginButton";
 import SignupButton from "../buttons/SignupButton";
+import swal from "sweetalert";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       console.error("Please fill in all fields");
     } else {
-      console.log("Login attempt with:", { email, password });
+      try {
+        const response = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // console.log("Login successful:", data);
+          swal("Success", "Login successful", "success");
+        } else {
+          // console.error("Login failed:", data.message);
+          swal("Oops!", `${data.message}`, "error");
+        }
+      } catch (error) {
+        console.error("Error during login request:", error);
+        swal("Oops", "Something went wrong!", "error");
+      }
 
       setEmail("");
       setPassword("");
@@ -42,7 +65,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={css.input}
-            placeholder="john@exampe.com"
+            placeholder="john@example.com"
             required
           />
           <label htmlFor="password">Password</label>
