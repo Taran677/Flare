@@ -45,7 +45,8 @@ label {
     font-family: "Playwrite GB S", cursive;
 }
 
-.swal-button, .swal-button:focus {
+.swal-button,
+.swal-button:focus {
     box-shadow: 0 0.3rem 0 var(--theme-invert-90-color);
     color: var(--theme-invert-90-color);
     font-family: "Playwrite GB S", cursive;
@@ -61,5 +62,5 @@ label {
 
 .swal-button:active {
     color: var(--login-button-bg-hover);
-    background: var(--theme-invert-90-color) !important ;
+    background: var(--theme-invert-90-color) !important;
 }

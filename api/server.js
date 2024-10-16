@@ -4,9 +4,13 @@ const User = require("./models/User"); // Use the same User model for both signu
 const bcrypt = require("bcrypt");
 const app = express();
 const cors = require("cors");
-require('dotenv').config();
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+
+require("dotenv").config();
 
 app.use(express.json());
+app.use(cookieParser()); // Add cookie parser
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -23,6 +27,27 @@ mongoose
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
+
+const verifyToken = (req, res, next) => {
+  const token = req.cookies.token; // Extract token from cookies
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: "Access denied. No token provided." });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = decoded.userId;
+    next();
+  } catch (err) {
+    return res.status(403).json({ message: "Invalid token." });
+  }
+};
+
+app.get("/protected", verifyToken, (req, res) => {
+  res.status(200).json({ message: "You have access to this protected route!" });
+});
 
 // Signup route
 app.post("/signup", async (req, res) => {
@@ -51,6 +76,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+// Login route
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -65,11 +91,30 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    res.status(200).json({ message: "Login successful", userId: user._id });
+    // Generate JWT
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    // Set the token as an HTTP-only cookie
+    res
+      .cookie("token", token, {
+        httpOnly: true, // Secure cookie
+        sameSite: "lax",
+        maxAge: 3600000, // 1 hour
+      })
+      .status(200)
+      .json({ message: "Login successful", username: user.username });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
+});
+
+// Logout route
+app.post("/logout", (req, res) => {
+  res.clearCookie("token"); // Clear the token cookie
+  res.status(200).json({ message: "Logged out successfully" });
 });
 
 app.listen(3000, () => {

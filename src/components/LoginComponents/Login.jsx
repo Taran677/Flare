@@ -3,8 +3,10 @@ import css from "./common.module.css";
 import LoginButton from "../buttons/LoginButton";
 import SignupButton from "../buttons/SignupButton";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ loading, setLoading, setIsLogin }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,11 +17,13 @@ export default function Login() {
       console.error("Please fill in all fields");
     } else {
       try {
+        setLoading(true);
         const response = await fetch("http://localhost:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ email, password }),
         });
 
@@ -27,7 +31,11 @@ export default function Login() {
 
         if (response.ok) {
           // console.log("Login successful:", data);
+          setIsLogin(true);
           swal("Success", "Login successful", "success");
+          
+
+          navigate("/");
         } else {
           // console.error("Login failed:", data.message);
           swal("Oops!", `${data.message}`, "error");
@@ -35,6 +43,8 @@ export default function Login() {
       } catch (error) {
         console.error("Error during login request:", error);
         swal("Oops", "Something went wrong!", "error");
+      } finally {
+        setLoading(false);
       }
 
       setEmail("");

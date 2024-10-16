@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "./Hero.module.css";
 import GetStarted from "../buttons/GetStarted";
 import LearnMore from "../buttons/LearnMore";
 import SideNav from "./SideNav";
 import CardContainer from "../Cards/CardContainer";
+
 export default function Hero({ isLogin, userName, profile }) {
+
   if (!isLogin) {
     return (
       <main className={css.hero}>

@@ -3,8 +3,8 @@ import css from "./common.module.css";
 import Submit from "../buttons/Submit";
 import swal from "sweetalert";
 
-export default function Signup() {
-  const [step, setStep] = useState(0); // Controls form step
+export default function Signup({ loading, setLoading }) {
+  const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -27,6 +27,7 @@ export default function Signup() {
       setStep(1);
     } else {
       try {
+        setLoading(true);
         const response = await fetch("http://localhost:3000/signup", {
           method: "POST",
           headers: {
@@ -45,6 +46,8 @@ export default function Signup() {
       } catch (error) {
         console.error("Error during signup request", error);
         swal("Oops!", `Error during signup request`, "error");
+      } finally{
+        setLoading(false)
       }
     }
   };
