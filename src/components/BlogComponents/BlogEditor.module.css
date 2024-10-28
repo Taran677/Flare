@@ -1,0 +1,678 @@
+
+
+.editorContainer {
+  max-width: 1200px;
+  /* margin: 0 auto; */
+  padding: 20px;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.topBarButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.titleInput {
+  flex: 1;
+  font-size: 24px;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.titleInput:focus {
+  border-color: #0066cc;
+}
+
+.saveButton,
+.previewButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.saveButton {
+  background-color: #0066cc;
+  color: white;
+}
+
+.previewButton {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.saveButton:hover {
+  background-color: #0052a3;
+}
+
+.previewButton:hover {
+  background-color: #e0e0e0;
+}
+
+.previewButton.active {
+  background-color: #333;
+  color: white;
+}
+
+.editorPreviewContainer {
+  display: flex;
+  gap: 20px;
+  height: calc(100vh - 140px);
+}
+
+.editor {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.withPreview .editor {
+  flex: 0 0 50%;
+}
+
+.previewContainer {
+  flex: 0 0 50%;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.preview {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.previewTitle {
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.previewContent {
+  line-height: 1.6;
+}
+
+.previewImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.blocksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.block {
+  position: relative;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0.3rem 0 #ddd;
+}
+
+.blockControls {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f9fa;
+  border-radius: 4px 4px 0 0;
+}
+
+.blockTypeSelect {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.formatButtons,
+.alignButtons,
+.mediaButtons {
+  display: flex;
+  gap: 4px;
+}
+
+.formatButton,
+.alignButton,
+.mediaButton,
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.formatButton:hover,
+.alignButton:hover,
+.mediaButton:hover,
+.deleteButton:hover {
+  background-color: #f0f0f0;
+}
+
+.formatButton.active,
+.alignButton.active,
+.mediaButton.active {
+  background-color: #e0e0e0;
+}
+
+.deleteButton {
+  margin-left: auto;
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.deleteButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.textarea {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.paragraph {
+  font-size: 16px;
+}
+
+.imageBlock {
+  padding: 16px;
+}
+
+.uploadedImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.emojiPickerWrapper {
+  position: absolute;
+  z-index: 1000;
+  top: 100%;
+  right: 0;
+}
+
+.emojiPickerWrapper button {
+  box-shadow: unset;
+  border: unset !important;
+  padding-inline: unset;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #666;
+}
+
+.editorContainer {
+  max-width: unset;
+  margin: 1rem 1rem !important;
+  min-width: 90vw;
+  align-items: stretch;
+  padding: 1.5rem;
+  font-family: "Raleway", serif;
+}
+
+.topBar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.titleInput {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #e5e7eb;
+  outline: none;
+}
+
+.titleInput:focus {
+  border-bottom-color: #3b82f6;
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.saveButton:hover {
+  background-color: #2563eb;
+}
+
+.saveButton:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.editor {
+  max-width: 64rem;
+  margin: 2rem 0;
+}
+
+.blocksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.block {
+  position: relative;
+}
+
+.blockControls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.blockTypeSelect {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  background-color: white;
+  font-size: 0.875rem;
+}
+
+.formatButtons,
+.alignButtons,
+.mediaButtons {
+  display: flex;
+  gap: 0.25rem;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+  border-left: 1px solid #e5e7eb;
+}
+
+.formatButton,
+.alignButton,
+.mediaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.formatButton:hover,
+.alignButton:hover,
+.mediaButton:hover {
+  background-color: #f3f4f6;
+}
+
+.formatButton.active,
+.alignButton.active,
+.mediaButton.active {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  margin-left: auto;
+  border: 1px solid #fecaca;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #fee2e2;
+}
+
+.deleteButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 1.5em;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  background-color: white;
+}
+
+.textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.h1 {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.paragraph {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.imageBlock {
+  margin: 1rem 0;
+}
+
+.uploadedImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+}
+
+.emojiPickerWrapper {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 0.375rem;
+  background-color: white;
+}
+
+.saveIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.editorContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.topBar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.titleInput {
+  flex: 1;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.titleInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #0056b3;
+}
+
+.saveButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.editor {
+  position: relative;
+}
+
+.blocksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.block {
+  position: relative;
+  background: white;
+  border-radius: 4px;
+}
+
+.blockControls {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--login-button-bg);
+  border-bottom: 1px solid #eee;
+  border-radius: 4px 4px 0 0;
+  align-items: center;
+}
+
+.blockControls button,
+.blockControls select {
+  box-shadow: 0 0.1rem 0 var(--theme-invert-90-color);
+}
+
+.blockTypeSelect {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  background: white;
+}
+
+.formatButtons,
+.alignButtons,
+.mediaButtons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.formatButton,
+.alignButton,
+.mediaButton,
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.formatButton:hover,
+.alignButton:hover,
+.mediaButton:hover,
+.deleteButton:hover {
+  background: #f0f0f0;
+}
+
+.formatButton.active,
+.alignButton.active,
+.mediaButton.active {
+  background: #e3f2fd;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.formatButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  margin-left: auto;
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.deleteButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: inherit;
+  line-height: 1.5;
+  background: transparent;
+}
+
+.h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.paragraph {
+  font-size: 1rem;
+}
+
+.imageBlock {
+  padding: 1rem;
+}
+
+.uploadedImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.emojiPickerWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 792px) {
+  .editorPreviewContainer {
+    flex-direction: column;
+  }
+}

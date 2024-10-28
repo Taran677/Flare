@@ -1,5 +1,5 @@
 import React from "react";
-import { RevolvingDot } from "react-loader-spinner"; 
+import { RevolvingDot } from "react-loader-spinner";
 
 const LoadingSpinner = () => {
   return (
@@ -17,7 +17,6 @@ const LoadingSpinner = () => {
         alignItems: "center",
       }}
     >
-      render(
       <RevolvingDot
         visible={true}
         height="80"
@@ -27,7 +26,6 @@ const LoadingSpinner = () => {
         wrapperStyle={{}}
         wrapperClass=""
       />
-      )
     </div>
   );
 };

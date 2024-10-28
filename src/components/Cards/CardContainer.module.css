@@ -1,49 +1,99 @@
-.username{
+.username {
     color: var(--accent-color);
 }
 
-.card1{
+.usernameOriginal{
+    font-size: 1rem;
+    color: var(--accent-color   );
+}
+
+.column {
+    justify-content: space-between;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card1 {
     grid-template-columns: 2fr 3fr;
     grid-template-rows: 1fr;
     max-height: 80vh;
+    flex-direction: row;
+    gap: 1rem;
+    height: 40vh;
+
 }
 
-.card1:hover{
+.card1:hover {
     background: var(--accent-color-20);
 }
 
-.illus{
+.illus {
     min-height: 100%;
     border-radius: 0.5rem;
 }
 
-.illusParent{
-    grid-row: span 2;
+.illusParent {
+    display: flex;
+    flex: max-content 0 0;
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-.mainHead{
-    font-size: 3rem;
-    width: 100%;
-    text-align: start;
+
 }
 
+.mainHead {
+    font-size: 3rem;
+    width: 100%;
+    font-weight: 400;
+    text-align: start;
+    position: relative;
+
+}
+
+.rowHeading {
+    align-items: flex-start;
+}
+
+.rowHeading img{
+    flex: 30% 1 0;
+}
+
+.bottomLine {
+    display: flex;
+}
+
+.greetingRow{
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-family: "Playwrite GB S", serif;
+    color: var(--theme-invert-90-color);
+}
+
+
 @media screen and (max-width: 576px) {
-    .card1{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 3fr;
-    }
-    .illus{
+
+    .illus {
         width: 100%;
         object-fit: cover;
     }
 }
 
-@media (min-width: 992px){
-    .card1{
-        height: 40vh;
-        grid-template-columns: 1fr 3fr;
-    }
-    
+@media (max-width: 875px) {
+   .illusParent{
+    width: 100%;
+    height: 40vh;
+   }    
+   .illus{
+    height: 40vh;
+    width: 100%;
+    background: #F4F5F8;
+   }
+   .card1{
+    flex-direction: column;
+    height: auto;
+   }
 }

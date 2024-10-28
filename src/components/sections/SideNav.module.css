@@ -16,9 +16,12 @@
     gap: 0.3rem;
     transition:  box-shadow 0.1s ease, transform 0.1s ease, background 0.2s ease-out, color 0.25s ease-in;
     width: 100%;
+    justify-content: center;
 }
 
 .dropBtn{
+    top: 50%;
+    transform: translateY(-50%);
     position: absolute;
     top: 1.3rem;
     right: 1rem;
@@ -27,7 +30,7 @@
 }
 
 .dropBtn:hover{
-    transform: rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
 }
 .dropList{
     animation: appear 1s ease;
@@ -57,5 +60,12 @@
     }
     to{
         height: 100%;
+    }
+}
+
+@media screen and (max-width: 875px) {
+    .navItem{
+        padding: 0.4rem 0.8rem;
+
     }
 }

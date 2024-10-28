@@ -13,12 +13,30 @@ export default function Signup({ loading, setLoading }) {
     email: "",
     password: "",
   });
+  const [birthdayInputType, setBirthdayInputType] = useState("date");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleBirthdayChange = (e) => {
+    let value = e.target.value;
+    if (birthdayInputType === "text") {
+      const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+      if (dateRegex.test(value)) {
+        const [day, month, year] = value.split("/");
+        value = `${year}-${month}-${day}`; // Convert to yyyy-mm-dd for storage
+      }
+    }
+    setFormData({ ...formData, birthday: value });
+  };
+
+  const handleRightClick = (e) => {
+    e.preventDefault(); // Prevent the default right-click context menu
+    setBirthdayInputType((prevType) => (prevType === "date" ? "text" : "date"));
   };
 
   const handleSubmit = async (e) => {
@@ -28,7 +46,7 @@ export default function Signup({ loading, setLoading }) {
     } else {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/signup", {
+        const response = await fetch("http://localhost:3000/auth/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -37,20 +55,19 @@ export default function Signup({ loading, setLoading }) {
         });
         const data = await response.json();
         if (response.ok) {
-          // console.log("Signup successful", data);
-          swal("Success", "Account Created Successfuly", "success");
+          swal("Success", "Account Created Successfully", "success");
         } else {
-          // console.error("Signup failed", data.message);
           swal("Oops!", `${data.message}`, "error");
         }
       } catch (error) {
         console.error("Error during signup request", error);
-        swal("Oops!", `Error during signup request`, "error");
-      } finally{
-        setLoading(false)
+        swal("Oops!", "Error during signup request", "error");
+      } finally {
+        setLoading(false);
       }
     }
   };
+
   const today = new Date().toISOString().split("T")[0];
 
   return (
@@ -95,21 +112,28 @@ export default function Signup({ loading, setLoading }) {
                 maxLength={8}
               />
             </label>
-            <Submit text={"Ok"} />
+            <Submit text="Ok" />
           </form>
         )}
         {step === 1 && (
           <form className={css.form2} onSubmit={handleSubmit}>
             <label>
-              Enter Birthday
+              Enter Birthday{" "}
+              <span className={css.info}>{`(Enter ${birthdayInputType})`}</span>
               <input
                 className={css.input}
-                type="date"
+                type={birthdayInputType}
                 name="birthday"
-                value={formData.birthday}
-                onChange={handleChange}
+                value={
+                  birthdayInputType === "text" && formData.birthday
+                    ? formData.birthday.split("-").reverse().join("/")
+                    : formData.birthday
+                }
+                onChange={handleBirthdayChange}
+                onContextMenu={handleRightClick} // Right-click toggles input type
                 max={today}
                 required
+                placeholder={birthdayInputType === "text" ? "dd/mm/yyyy" : ""}
               />
             </label>
             <label>

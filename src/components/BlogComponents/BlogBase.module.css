@@ -1,0 +1,82 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .blogPage {
+    width: 80%;
+    max-width: 1000px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .editorWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .customEditor {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .preview {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+  
+  .contentPreview {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  .emojiPickerWrapper {
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.imageBlock {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.uploadedImage {
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.formatControls button {
+  position: relative;
+}
+
+.formatControls button:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}

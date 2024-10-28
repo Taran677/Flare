@@ -18,6 +18,7 @@
     --accent-color: #ffb703;
     --accent-color-20: #ffb80335;
     --secondary-heading-color: #7c7c7c;
+    --box-shadow: rgba(0, 0, 0, 0.1)
 }
 
 @media screen and (max-width: 576px) {
@@ -63,4 +64,8 @@ label {
 .swal-button:active {
     color: var(--login-button-bg-hover);
     background: var(--theme-invert-90-color) !important;
+}
+#row2{
+    gap: 1rem;
+    align-items: center;
 }

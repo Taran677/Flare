@@ -30,9 +30,7 @@ export default function Navbar({ isLogin, setIsLogin }) {
             </li>
 
             <li className={css.navItem}>
-              <a href="#" className={css.navLink}>
-                Blogs
-              </a>
+              <Link className={css.navLink} to="/user/blogs">Blogs</Link>
             </li>
             <li className={css.navItem}>
               <a href="#" className={css.navLink}>

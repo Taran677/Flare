@@ -5,8 +5,9 @@ import {
   Routes,
   useNavigate,
   useLocation,
+  useParams,
 } from "react-router-dom";
-
+import "sweetalert2/dist/sweetalert2.min.css";
 import "./App.css";
 import css from "./App.module.css";
 import Hero from "./components/sections/Hero";
@@ -14,15 +15,18 @@ import Navbar from "./components/sections/Navbar";
 import Login from "./components/LoginComponents/Login";
 import Signup from "./components/LoginComponents/Signup";
 import Loading from "./components/Auxilliary/Loading";
+import BlogBase from "./components/BlogComponents/BlogBase";
+import UserBlogs from "./components/BlogComponents/UserBlogs";
+import BlogPost from "./components/BlogComponents/BlogPost";
 
-const useAuthCheck = (setIsLogin) => {
-  const navigate = useNavigate(); // This hook must be inside a Router
+const useAuthCheck = (setIsLogin, setNickname, setProfile, setUsername) => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:3000/protected", {
+        const response = await fetch("http://localhost:3000/auth/protected", {
           credentials: "include",
         });
 
@@ -32,43 +36,86 @@ const useAuthCheck = (setIsLogin) => {
 
         const data = await response.json();
 
-        if (data.message === "You have access to this protected route!") {
+        if (data.message === "User data retrieved successfully!") {
           setIsLogin(true);
-     
+          setNickname(data.nickname);
+          setUsername(data.username);
+          setProfile(data.profilePicture);
         } else {
           setIsLogin(false);
         }
       } catch (error) {
         console.error("Error verifying token:", error);
+
         setIsLogin(false);
       }
     };
 
-    checkAuth(); // Trigger auth check
-  }, [location, navigate, setIsLogin]);
+    checkAuth();
+  }, [location, navigate, setIsLogin, setUsername]);
 };
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [userName, setUsername] = useState("Taran");
+  const [nickname, setNickname] = useState("Taran");
+  const [username, setUsername] = useState("Taran");
+  const [profile, setProfile] = useState("");
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    console.log(isLogin);
-  }, []);
+
   return (
     <Router>
-      <AuthWrapper setIsLogin={setIsLogin} />
+      <AuthWrapper
+        setIsLogin={setIsLogin}
+        setNickname={setNickname}
+        setProfile={setProfile}
+        setUsername={setUsername}
+      />
+
       <div className={css.app}>
-        <Navbar isLogin={isLogin} setIsLogin={setIsLogin} userName={userName} />
+        <Navbar isLogin={isLogin} setIsLogin={setIsLogin} nickname={nickname} />
         <Routes>
-          <Route path="/" element={<Hero isLogin={isLogin} />} />
+          <Route
+            path="/"
+            element={
+              <Hero
+                setIsLogin={setIsLogin}
+                isLogin={isLogin}
+                nickname={nickname}
+                username={username}
+                setUsername={setUsername}
+                profile={profile}
+              />
+            }
+          />
           <Route
             path="/login"
-            element={<Login loading={loading} setLoading={setLoading} setIsLogin={setIsLogin} />}
+            element={
+              <Login
+                loading={loading}
+                setLoading={setLoading}
+                setIsLogin={setIsLogin}
+              />
+            }
           />
           <Route
             path="/signup"
             element={<Signup loading={loading} setLoading={setLoading} />}
+          />
+          <Route
+            path="/blog/new"
+            element={<BlogBase loading={loading} setLoading={setLoading} />}
+          />
+          <Route
+            path="/blog/edit/:slug"
+            element={<BlogBase loading={loading} setLoading={setLoading} />}
+          />
+          <Route
+            path="/user/blogs"
+            element={<UserBlogs loading={loading} setLoading={setLoading} />}
+          />
+          <Route
+            path="/blog/:slug"
+            element={<BlogPost loading={loading} setLoading={setLoading} />}
           />
         </Routes>
       </div>
@@ -77,8 +124,8 @@ function App() {
   );
 }
 
-function AuthWrapper({ setIsLogin }) {
-  useAuthCheck(setIsLogin); 
+function AuthWrapper({ setIsLogin, setNickname, setProfile, setUsername }) {
+  useAuthCheck(setIsLogin, setNickname, setProfile, setUsername);
   return null;
 }
 

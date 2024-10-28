@@ -10,6 +10,16 @@
 
 }
 
+label {
+    display: flex;
+}
+
+.info{
+    font-size: 0.8rem;
+    font-family: "Raleway", serif;
+
+}
+
 .form,
 .SignUp {
     display: flex;

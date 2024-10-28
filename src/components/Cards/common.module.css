@@ -1,12 +1,13 @@
 .card {
-    position:relative;
+    position: relative;
     cursor: pointer;
     padding: 1rem;
     min-height: 10rem;
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
+    display: flex;
+    flex-direction: column;
 }
+
+.profilePic {}
 
 .card:hover {
     filter: contrast(1.1);
@@ -23,15 +24,20 @@
 .row {
     display: flex;
     flex-direction: row;
-    flex: 100% 0 0;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-end;
     gap: 2rem;
 }
 
-.bottomLine{
-    transform: translateY(-50%);
+
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex: 68% 1 1;
+
 }
+
 
 .icon {
     background: var(--login-button-bg);
@@ -41,10 +47,6 @@
     border-radius: 0.5rem;
 }
 
-.row{
-    min-height:6rem;
-    align-items: flex-end;
-}
 
 
 .card,
@@ -72,9 +74,20 @@
     max-height: 100%;
     object-fit: contain;
 }
-.profilePic{
-    position: absolute;
-    top:1.2rem;
-    right:1.2rem;
+
+.profilePic {
+    max-width: 6rem;
+    min-height: 6rem;
+    object-fit: cover;
 }
 
+
+
+@media screen and (max-width: 865px) {
+    .profilePic {
+        max-width: unset;
+        min-height: unset;
+
+    }
+
+}

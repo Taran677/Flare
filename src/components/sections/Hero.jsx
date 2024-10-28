@@ -4,8 +4,11 @@ import GetStarted from "../buttons/GetStarted";
 import LearnMore from "../buttons/LearnMore";
 import SideNav from "./SideNav";
 import CardContainer from "../Cards/CardContainer";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+export default function Hero({ isLogin, username, setIsLogin, profile, nickname, setNickname }) {
+const navigate = useNavigate();
 
-export default function Hero({ isLogin, userName, profile }) {
 
   if (!isLogin) {
     return (
@@ -33,16 +36,19 @@ export default function Hero({ isLogin, userName, profile }) {
   } else {
     return (
       <main className={css.loginHero}>
-        <SideNav></SideNav>
+        <SideNav isLogin={isLogin} setIsLogin={setIsLogin}></SideNav>
 
         <div className={css.mainHero}>
           <CardContainer
             content={{
               index: 0,
               heading: "Welcome Back ",
-              spanElement1: userName,
+              spanElement1: nickname,
+              spanElement2: username,
               bottomLine: "Create New Post",
-              picture1: profile,
+              profile,
+              navigate,
+              greet: true,
             }}
           ></CardContainer>
         </div>
