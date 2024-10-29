@@ -10,6 +10,7 @@ import {
   Smile,
   Bold,
   Italic,
+  MessageSquare,
   Underline,
   Save,
   Eye,
@@ -17,7 +18,9 @@ import {
 import EmojiPicker from "emoji-picker-react";
 import swal from "sweetalert";
 import styles from "./BlogEditor.module.css";
-
+import { TemplateSelector } from "./TemplateSelector";
+import { PublishSettings } from "./PublishSettings";
+import { templates } from "./blogTemplates";
 const BlogEditor = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -25,6 +28,9 @@ const BlogEditor = () => {
   const [blocks, setBlocks] = useState([
     { id: "1", type: "paragraph", content: "", style: { textAlign: "left" } },
   ]);
+  const [selectedTemplate, setSelectedTemplate] = useState("minimal");
+  const [isPublished, setIsPublished] = useState(false);
+  const [publishedUrl, setPublishedUrl] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [activeBlockId, setActiveBlockId] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -161,6 +167,9 @@ const BlogEditor = () => {
             break;
           case "underline":
             tag = "u";
+            break;
+          case "quote":
+            tag = "q";
             break;
           default:
             return;
@@ -477,7 +486,47 @@ const BlogEditor = () => {
       handleSelectionChange,
     ]
   );
+  const handlePublish = async ({ subdomain, isPublic }) => {
+    try {
+      const response = await fetch("http://localhost:3000/blog/publish", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title,
+          blocks,
+          template: selectedTemplate,
+          subdomain,
+          isPublic,
+        }),
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to publish blog");
+      }
+
+      const data = await response.json();
+      setPublishedUrl(data.url);
+      setIsPublished(true);
+
+      swal({
+        title: "Success",
+        text: `Blog published successfully at ${data.url}!`,
+        icon: "success",
+        button: "OK",
+      });
+    } catch (error) {
+      console.error("Error publishing blog:", error);
+      swal({
+        title: "Error",
+        text: "Failed to publish blog. Please try again.",
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
   const renderPreview = () => {
     return (
       <div className={styles.preview}>
@@ -590,7 +639,6 @@ const BlogEditor = () => {
                     <option value="h2">Heading 2</option>
                     <option value="h3">Heading 3</option>
                   </select>
-
                   <div className={styles.formatButtons}>
                     <button
                       onClick={() => applyStyle(index, "bold")}
@@ -619,8 +667,16 @@ const BlogEditor = () => {
                     >
                       <Underline size={16} />
                     </button>
+                    <button
+                      onClick={() => applyStyle(index, "quote")}
+                      className={`${styles.formatButton} ${styles.quote}`}
+                      disabled={
+                        !selection.blockId || selection.start === selection.end
+                      }
+                    >
+                      <MessageSquare size={16} />
+                    </button>
                   </div>
-
                   <div className={styles.alignButtons}>
                     <button
                       onClick={() =>
@@ -653,7 +709,6 @@ const BlogEditor = () => {
                       <AlignRight size={16} />
                     </button>
                   </div>
-
                   <div className={styles.mediaButtons}>
                     <button
                       onClick={() => fileInputRef.current?.click()}
@@ -672,7 +727,6 @@ const BlogEditor = () => {
                       <Smile size={16} />
                     </button>
                   </div>
-
                   <button
                     onClick={() => deleteBlock(index)}
                     className={`${styles.deleteButton} ${
@@ -706,6 +760,27 @@ const BlogEditor = () => {
 
         {showPreview && (
           <div className={styles.previewContainer}>{renderPreview()}</div>
+        )}
+      </div>
+      <div className={styles.publishSection}>
+        <h2 className={styles.sectionTitle}>Choose a Template</h2>
+        <TemplateSelector
+          selectedTemplate={selectedTemplate}
+          onSelectTemplate={setSelectedTemplate}
+        />
+
+        <h2 className={styles.sectionTitle}>Publishing Settings</h2>
+        <PublishSettings onPublish={handlePublish} />
+
+        {isPublished && (
+          <div className={styles.publishedInfo}>
+            <p>
+              Your blog is published at:{" "}
+              <a href={publishedUrl} target="_blank" rel="noopener noreferrer">
+                {publishedUrl}
+              </a>
+            </p>
+          </div>
         )}
       </div>
     </div>

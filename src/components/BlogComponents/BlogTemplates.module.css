@@ -1,0 +1,60 @@
+
+  /* BlogTemplates.module.css */
+  .minimal {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: white;
+  }
+  
+  .minimal h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 32px;
+  }
+  
+  .minimal img {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 24px 0;
+  }
+  
+  .magazine {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 32px;
+    background-color: #f8f9fa;
+  }
+  
+  .magazine h1 {
+    font-size: 48px;
+    font-family: serif;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .magazine img {
+    margin: 32px 0;
+  }
+  
+  .modern {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    background: linear-gradient(to bottom, white, #f8f9fa);
+  }
+  
+  .modern h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 48px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .modern img {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 32px 0;
+  }

@@ -671,6 +671,34 @@
   border-radius: 4px;
 }
 
+.publishSection {
+  margin-top: 32px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.publishedInfo {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #f0fff4;
+  border: 1px solid #9ae6b4;
+  border-radius: 4px;
+}
+
+.publishedInfo a {
+  color: #2f855a;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 792px) {
   .editorPreviewContainer {
     flex-direction: column;
