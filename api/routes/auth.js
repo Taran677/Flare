@@ -101,7 +101,7 @@ router.get("/protected", verifyToken, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log(user.profilePicture)
+    console.log(user.profilePicture);
     const profilePictureBase64 = user.profilePicture
       ? `data:${
           user.profilePicture.contentType
@@ -165,7 +165,7 @@ router.post("/login", async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Use HTTPS in production
-        sameSite: "strict",
+        sameSite: "None",
         maxAge: 3600000, // 1 hour
       })
       .status(200)
@@ -185,7 +185,7 @@ router.post("/logout", verifyToken, (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "None",
   });
   res.status(200).json({ message: "Logged out successfully" });
 });
@@ -213,7 +213,7 @@ router.delete("/delete-account", verifyToken, async (req, res) => {
     res.clearCookie("token", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "None",
     });
 
     res.status(200).json({ message: "Account deleted successfully!" });

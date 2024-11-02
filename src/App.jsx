@@ -34,7 +34,7 @@ const useAuthCheck = (setIsLogin, setNickname, setProfile, setUsername) => {
         );
 
         if (!response.ok) {
-          throw new Error("Failed to authenticate");
+          throw new Error("");
         }
 
         const data = await response.json();
