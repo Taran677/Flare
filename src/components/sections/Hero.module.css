@@ -130,8 +130,9 @@
 
 @media (max-width: 792px){
     .loginHero{
-        flex-direction: column;
+        flex-direction: column !important;
     }
+    
 }
 
 @media screen and (max-width: 576px) {

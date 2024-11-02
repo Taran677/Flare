@@ -73,6 +73,11 @@
     color: var(--theme-invert-90-color);
 }
 
+@media (max-width: 792px){
+    .card1{
+        max-height: unset !important;
+    }
+}
 
 @media screen and (max-width: 576px) {
 

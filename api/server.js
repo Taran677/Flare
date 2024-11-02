@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "https://flare-jiql.onrender.com",
       "http://localhost:5174",
       "https://flare-green.vercel.app",
     ],
@@ -44,4 +44,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-

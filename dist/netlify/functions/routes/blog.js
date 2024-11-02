@@ -92,7 +92,7 @@ router.post("/publish", verifyToken, async (req, res) => {
     // Return the URL of the published blog post with username
     res.status(200).json({
       message: "Blog published successfully",
-      url: `http://localhost:5173/${user.username}/blog/${blog.slug}`,
+      url: `https://flare-jiql.onrender.com/${user.username}/blog/${blog.slug}`,
     });
   } catch (error) {
     console.error("Error publishing blog:", error);
