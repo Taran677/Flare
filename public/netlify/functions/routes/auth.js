@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user");
 const { verifyToken } = require("../middleware/auth");
 require("dotenv").config();
 
@@ -101,7 +101,7 @@ router.get("/protected", verifyToken, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log(user.profilePicture)
+    console.log(user.profilePicture);
     const profilePictureBase64 = user.profilePicture
       ? `data:${
           user.profilePicture.contentType
