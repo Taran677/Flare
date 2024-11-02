@@ -19,8 +19,9 @@ import EmojiPicker from "emoji-picker-react";
 import swal from "sweetalert";
 import styles from "./BlogEditor.module.css";
 import { TemplateSelector } from "./TemplateSelector";
-import { PublishSettings } from "./PublishSettings";
+import PublishSettings from "./PublishSettings";
 import { templates } from "./blogTemplates";
+import { template } from "lodash";
 const BlogEditor = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -29,6 +30,7 @@ const BlogEditor = () => {
     { id: "1", type: "paragraph", content: "", style: { textAlign: "left" } },
   ]);
   const [selectedTemplate, setSelectedTemplate] = useState("minimal");
+  const [activeTemplate, setActiveTemplate] = useState("minimal");
   const [isPublished, setIsPublished] = useState(false);
   const [publishedUrl, setPublishedUrl] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -61,6 +63,10 @@ const BlogEditor = () => {
         const data = await response.json();
         setTitle(data.title);
         setBlocks(data.blocks);
+        if (data.template) {
+          setSelectedTemplate(data.template);
+          setActiveTemplate(data.template);
+        }
       } catch (error) {
         console.error("Error fetching blog:", error);
         swal({
@@ -360,6 +366,55 @@ const BlogEditor = () => {
     [activeBlockId, blocks, createNewBlock]
   );
 
+  const onSelectTemplate = (templateId) => {
+    setSelectedTemplate(templateId);
+    setActiveTemplate(templateId);
+  };
+
+  const onUpdateBlogTemplate = async (templateId) => {
+    try {
+      // Only make the API call if we have a slug (existing blog)
+      if (slug) {
+        const response = await fetch(
+          `http://localhost:3000/blog/${slug}/template`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+              template: templateId,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to update template");
+        }
+
+        setActiveTemplate(templateId);
+        swal({
+          title: "Success",
+          text: "Blog template updated successfully!",
+          icon: "success",
+          button: "OK",
+        });
+      } else {
+        // If it's a new blog, just update the state
+        setActiveTemplate(templateId);
+      }
+    } catch (error) {
+      console.error("Error updating template:", error);
+      swal({
+        title: "Error",
+        text: "Failed to update template. Please try again.",
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
+
   const adjustTextareaHeight = useCallback((textarea) => {
     if (textarea) {
       textarea.style.height = "auto";
@@ -486,7 +541,7 @@ const BlogEditor = () => {
       handleSelectionChange,
     ]
   );
-  const handlePublish = async ({ subdomain, isPublic }) => {
+  const handlePublish = async ({ isPublic }) => {
     try {
       const response = await fetch("http://localhost:3000/blog/publish", {
         method: "POST",
@@ -497,8 +552,7 @@ const BlogEditor = () => {
         body: JSON.stringify({
           title,
           blocks,
-          template: selectedTemplate,
-          subdomain,
+          template: activeTemplate, // Use activeTemplate instead of selectedTemplate
           isPublic,
         }),
       });
@@ -765,8 +819,9 @@ const BlogEditor = () => {
       <div className={styles.publishSection}>
         <h2 className={styles.sectionTitle}>Choose a Template</h2>
         <TemplateSelector
-          selectedTemplate={selectedTemplate}
-          onSelectTemplate={setSelectedTemplate}
+          selectedTemplate={activeTemplate}
+          onSelectTemplate={onSelectTemplate}
+          onUpdateBlogTemplate={onUpdateBlogTemplate}
         />
 
         <h2 className={styles.sectionTitle}>Publishing Settings</h2>

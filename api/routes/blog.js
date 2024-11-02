@@ -5,8 +5,150 @@ const User = require("../models/User");
 const multer = require("multer");
 
 const { verifyToken } = require("../middleware/auth");
+const { default: mongoose } = require("mongoose");
 const storage = multer.memoryStorage();
 
+router.get("/:username/:slug", async (req, res) => {
+  try {
+    // First find the user by username
+    const user = await User.findOne({ username: req.params.username });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Then find the blog post by slug and author ID
+    const blog = await Blog.findOne({
+      slug: req.params.slug,
+      author: user._id,
+    }).populate("author", "username nickname");
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Check if blog is published and public, or if the requesting user is the author
+    if (blog.status !== "published") {
+      return res
+        .status(403)
+        .json({ message: "This blog post is not published" });
+    }
+
+    if (!blog.status || !(blog.status === "published")) {
+      return res.status(403).json({ message: "This blog post is private" });
+    }
+
+    res.status(200).json({
+      _id: blog._id,
+      title: blog.title,
+      blocks: blog.blocks,
+      author: blog.author,
+      createdAt: blog.createdAt,
+      updatedAt: blog.updatedAt,
+      status: blog.status,
+      isPublic: blog.isPublic,
+      template: blog.template,
+    });
+  } catch (error) {
+    console.error("Error retrieving blog:", error);
+    res.status(500).json({
+      message: "Error retrieving blog",
+      error: error.message,
+    });
+  }
+});
+// Route to publish a blog
+router.post("/publish", verifyToken, async (req, res) => {
+  try {
+    const { title, blocks, isPublic, template } = req.body;
+
+    if (!title || !blocks) {
+      return res
+        .status(400)
+        .json({ message: "Title and content are required" });
+    }
+
+    // Find the user to get their username
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find and update the existing blog
+    const blog = await Blog.findOneAndUpdate(
+      { author: req.userId, title: title },
+      {
+        status: "published",
+        isPublic: isPublic,
+        template: template, // Add template to the update
+        updatedAt: new Date(),
+      },
+      { new: true }
+    );
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Return the URL of the published blog post with username
+    res.status(200).json({
+      message: "Blog published successfully",
+      url: `http://localhost:5173/${user.username}/blog/${blog.slug}`,
+    });
+  } catch (error) {
+    console.error("Error publishing blog:", error);
+    res.status(500).json({
+      message: "Error publishing blog",
+      error: error.message,
+    });
+  }
+});
+router.put("/:slug/template", verifyToken, async (req, res) => {
+  try {
+    const { template } = req.body;
+    const { slug } = req.params;
+
+    // Validate template input
+    if (!template) {
+      return res
+        .status(400)
+        .json({ message: "Template selection is required" });
+    }
+
+    // Find and update the blog, ensuring the user owns it
+    const blog = await Blog.findOneAndUpdate(
+      {
+        slug: slug,
+        author: req.userId, // Ensure the user owns this blog
+      },
+      {
+        template: template,
+        updatedAt: new Date(),
+      },
+      {
+        new: true, // Return the updated document
+        runValidators: true, // Run any mongoose validators
+      }
+    );
+
+    if (!blog) {
+      return res.status(404).json({
+        message: "Blog not found or you don't have permission to update it",
+      });
+    }
+
+    res.status(200).json({
+      message: "Blog template updated successfully",
+      template: blog.template,
+      updatedAt: blog.updatedAt,
+    });
+  } catch (error) {
+    console.error("Error updating blog template:", error);
+    res.status(500).json({
+      message: "Error updating blog template",
+      error: error.message,
+    });
+  }
+});
 // Create/Save blog
 router.post("/save", verifyToken, async (req, res) => {
   try {
@@ -86,30 +228,37 @@ router.post("/:slug?/update", verifyToken, async (req, res) => {
       blog = new Blog({
         title,
         blocks,
-        author: req.userId
+        author: req.userId,
       });
     }
 
     await blog.save();
     res.status(200).json({
       message: `Blog ${slug ? "updated" : "saved"} successfully`,
-      slug: blog.slug
+      slug: blog.slug,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error saving blog", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error saving blog", error: error.message });
   }
 });
 
 // Route to get a blog by slug
 router.get("/:slug", async (req, res) => {
   try {
-    const blog = await Blog.findOne({ slug: req.params.slug }).populate("author", "username nickname");
+    const blog = await Blog.findOne({ slug: req.params.slug }).populate(
+      "author",
+      "username nickname"
+    );
     if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
     }
     res.status(200).json(blog);
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving blog", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error retrieving blog", error: error.message });
   }
 });
 
@@ -118,7 +267,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
   try {
     const blog = await Blog.findOneAndDelete({
       _id: req.params.id,
-      author: req.userId
+      author: req.userId,
     });
 
     if (!blog) {
@@ -126,19 +275,24 @@ router.delete("/:id", verifyToken, async (req, res) => {
     }
 
     await User.findByIdAndUpdate(req.userId, {
-      $pull: { blogs: req.params.id }
+      $pull: { blogs: req.params.id },
     });
 
     res.status(200).json({ message: "Blog deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting blog", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error deleting blog", error: error.message });
   }
 });
 
 // Get user's blogs without filtering
 router.get("/", verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).populate("blogs", "title slug createdAt updatedAt status");
+    const user = await User.findById(req.userId).populate(
+      "blogs",
+      "title slug createdAt updatedAt status"
+    );
 
     // Return all blogs for the user
     res.status(200).json(user.blogs);

@@ -17,8 +17,8 @@ import Signup from "./components/LoginComponents/Signup";
 import Loading from "./components/Auxilliary/Loading";
 import BlogBase from "./components/BlogComponents/BlogBase";
 import UserBlogs from "./components/BlogComponents/UserBlogs";
-import BlogPost from "./components/BlogComponents/BlogPost";
-
+import BlogPost from "./components/Auxilliary/BlogPost";
+import BlogPostPreview from "./components/BlogComponents/BlogPost";
 const useAuthCheck = (setIsLogin, setNickname, setProfile, setUsername) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -105,6 +105,9 @@ function App() {
             path="/blog/new"
             element={<BlogBase loading={loading} setLoading={setLoading} />}
           />
+
+          <Route path="/:username/blog/:slug" element={<BlogPost />} />
+
           <Route
             path="/blog/edit/:slug"
             element={<BlogBase loading={loading} setLoading={setLoading} />}
@@ -115,7 +118,9 @@ function App() {
           />
           <Route
             path="/blog/:slug"
-            element={<BlogPost loading={loading} setLoading={setLoading} />}
+            element={
+              <BlogPostPreview loading={loading} setLoading={setLoading} />
+            }
           />
         </Routes>
       </div>
