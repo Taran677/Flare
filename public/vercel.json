@@ -1,11 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -14,22 +7,6 @@
     {
       "src": "/(.*)",
       "dest": "/index.html"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "(?<subdomain>[^.]+).yourdomain.com"
-        }
-      ],
-      "destination": "/api/blog/:subdomain/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/"
     }
   ]
 }
