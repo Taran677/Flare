@@ -61,11 +61,14 @@ const ImageUpload = () => {
     formData.append("image", imageFile);
 
     try {
-      const response = await fetch("http://localhost:3000/user/upload-image", {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://flare-jiql.onrender.com/user/upload-image",
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Upload failed");
@@ -196,7 +199,7 @@ export const triggerProfileUpload = () => {
       const formData = new FormData();
       formData.append("profilePicture", file);
       console.log(formData);
-      fetch("http://localhost:3000/user/update-profile-picture", {
+      fetch("https://flare-jiql.onrender.com/user/update-profile-picture", {
         method: "POST",
         body: formData,
         credentials: "include",

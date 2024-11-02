@@ -46,13 +46,16 @@ export default function Signup({ loading, setLoading }) {
     } else {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/auth/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await fetch(
+          "https://flare-jiql.onrender.com/auth/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
         const data = await response.json();
         if (response.ok) {
           swal("Success", "Account Created Successfully", "success");

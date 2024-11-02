@@ -19,7 +19,7 @@ export default function SideNav({ isLogin, setIsLogin }) {
       .then((willDelete) => {
         if (willDelete) {
           // Make the fetch request to delete the account
-          return fetch("http://localhost:3000/auth/delete-account", {
+          return fetch("https://flare-jiql.onrender.com/auth/delete-account", {
             method: "DELETE",
             credentials: "include", // Include cookies for authentication
           });
@@ -54,10 +54,13 @@ export default function SideNav({ isLogin, setIsLogin }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://flare-jiql.onrender.com/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         swal({
@@ -99,7 +102,7 @@ export default function SideNav({ isLogin, setIsLogin }) {
         if (!name) throw null; // if no name entered
 
         // Send the new username to the server
-        return fetch("http://localhost:3000/update-username", {
+        return fetch("https://flare-jiql.onrender.com/update-username", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

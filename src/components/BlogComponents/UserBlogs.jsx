@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
-import { ChevronRight, Pencil, Trash2, Plus } from 'lucide-react';
-import styles from './UserBlogsPage.module.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import { ChevronRight, Pencil, Trash2, Plus } from "lucide-react";
+import styles from "./UserBlogsPage.module.css";
 
 const UserBlogsPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -12,18 +12,21 @@ const UserBlogsPage = () => {
   const fetchUserBlogs = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/blog', {
-        method: 'GET',
+      const response = await fetch("https://flare-jiql.onrender.com/blog", {
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          swal("Session Expired", "Please login again to continue", "warning")
-            .then(() => navigate('/login'));
+          swal(
+            "Session Expired",
+            "Please login again to continue",
+            "warning"
+          ).then(() => navigate("/login"));
           return;
         }
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -32,7 +35,7 @@ const UserBlogsPage = () => {
       const data = await response.json();
       setBlogs(data);
     } catch (error) {
-      console.error('Error fetching blogs:', error);
+      console.error("Error fetching blogs:", error);
       swal("Error", "Failed to load blogs. Please try again later.", "error");
     } finally {
       setLoading(false);
@@ -49,13 +52,16 @@ const UserBlogsPage = () => {
     }).then(async (willDelete) => {
       if (willDelete) {
         try {
-          const response = await fetch(`http://localhost:3000/blog/${blogId}`, {
-            method: 'DELETE',
-            credentials: 'include',
-          });
+          const response = await fetch(
+            `https://flare-jiql.onrender.com/blog/${blogId}`,
+            {
+              method: "DELETE",
+              credentials: "include",
+            }
+          );
 
-          if (!response.ok) throw new Error('Failed to delete blog');
-          
+          if (!response.ok) throw new Error("Failed to delete blog");
+
           swal("Success", "Blog has been deleted!", "success");
           fetchUserBlogs();
         } catch (error) {
@@ -82,7 +88,7 @@ const UserBlogsPage = () => {
       <div className={styles.header}>
         <h1 className={styles.title}>My Blogs</h1>
         <button
-          onClick={() => navigate('/blog/new')}
+          onClick={() => navigate("/blog/new")}
           className={styles.newBlogButton}
         >
           <Plus size={20} />
@@ -92,10 +98,12 @@ const UserBlogsPage = () => {
 
       {blogs.length === 0 ? (
         <div className={styles.emptyState}>
-            <img src="/man-working.svg" alt="error" />
-          <p className={styles.emptyStateText}>You haven't created any blogs yet.</p>
+          <img src="/man-working.svg" alt="error" />
+          <p className={styles.emptyStateText}>
+            You haven't created any blogs yet.
+          </p>
           <button
-            onClick={() => navigate('/blog/new')}
+            onClick={() => navigate("/blog/new")}
             className={styles.createFirstBlog}
           >
             Create your first blog
@@ -109,11 +117,15 @@ const UserBlogsPage = () => {
                 <h2 className={styles.blogTitle}>{blog.title}</h2>
                 <div className={styles.blogMeta}>
                   <span>Status: {blog.status}</span>
-                  <span>Created: {new Date(blog.createdAt).toLocaleDateString()}</span>
-                  <span>Updated: {new Date(blog.updatedAt).toLocaleDateString()}</span>
+                  <span>
+                    Created: {new Date(blog.createdAt).toLocaleDateString()}
+                  </span>
+                  <span>
+                    Updated: {new Date(blog.updatedAt).toLocaleDateString()}
+                  </span>
                 </div>
               </div>
-              
+
               <div className={styles.actions}>
                 <button
                   onClick={() => navigate(`/blog/edit/${blog.slug}`)}

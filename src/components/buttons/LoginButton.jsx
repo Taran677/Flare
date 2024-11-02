@@ -8,10 +8,13 @@ export default function LoginButton({ isLogin, setIsLogin }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://flare-jiql.onrender.com/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         swal("Success!", "Successfully logged out.", "success");

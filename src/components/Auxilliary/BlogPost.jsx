@@ -16,7 +16,7 @@ const BlogPost = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3000/blog/${username}/${slug}`,
+          `https://flare-jiql.onrender.com/blog/${username}/${slug}`,
           {}
         );
 

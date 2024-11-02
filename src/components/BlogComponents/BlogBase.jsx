@@ -54,9 +54,12 @@ const BlogEditor = () => {
 
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:3000/blog/${slug}`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `https://flare-jiql.onrender.com/blog/${slug}`,
+          {
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) throw new Error("Failed to fetch blog");
 
@@ -314,7 +317,7 @@ const BlogEditor = () => {
         formData.append("image", resizedFile);
 
         const response = await fetch(
-          "http://localhost:3000/blog/upload-image",
+          "https://flare-jiql.onrender.com/blog/upload-image",
           {
             method: "POST",
             credentials: "include",
@@ -376,7 +379,7 @@ const BlogEditor = () => {
       // Only make the API call if we have a slug (existing blog)
       if (slug) {
         const response = await fetch(
-          `http://localhost:3000/blog/${slug}/template`,
+          `https://flare-jiql.onrender.com/blog/${slug}/template`,
           {
             method: "PUT",
             headers: {
@@ -447,8 +450,8 @@ const BlogEditor = () => {
 
     try {
       const url = slug
-        ? `http://localhost:3000/blog/${slug}/update`
-        : "http://localhost:3000/blog/save";
+        ? `https://flare-jiql.onrender.com/blog/${slug}/update`
+        : "https://flare-jiql.onrender.com/blog/save";
 
       const response = await fetch(url, {
         method: "POST",
@@ -543,19 +546,22 @@ const BlogEditor = () => {
   );
   const handlePublish = async ({ isPublic }) => {
     try {
-      const response = await fetch("http://localhost:3000/blog/publish", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          title,
-          blocks,
-          template: activeTemplate, // Use activeTemplate instead of selectedTemplate
-          isPublic,
-        }),
-      });
+      const response = await fetch(
+        "https://flare-jiql.onrender.com/blog/publish",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            title,
+            blocks,
+            template: activeTemplate, // Use activeTemplate instead of selectedTemplate
+            isPublic,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to publish blog");

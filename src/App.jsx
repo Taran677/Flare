@@ -26,9 +26,12 @@ const useAuthCheck = (setIsLogin, setNickname, setProfile, setUsername) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:3000/auth/protected", {
-          credentials: "include",
-        });
+        const response = await fetch(
+          "https://flare-jiql.onrender.com/auth/protected",
+          {
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to authenticate");

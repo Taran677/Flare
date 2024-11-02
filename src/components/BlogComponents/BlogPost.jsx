@@ -11,7 +11,9 @@ const BlogPost = () => {
   const fetchBlog = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3000/blog/${slug}`);
+      const response = await fetch(
+        `https://flare-jiql.onrender.com/blog/${slug}`
+      );
 
       if (!response.ok) {
         if (response.status === 404) {

@@ -18,14 +18,17 @@ export default function Login({ loading, setLoading, setIsLogin }) {
     } else {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+          "https://flare-jiql.onrender.com/auth/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
         const data = await response.json();
 
@@ -33,7 +36,6 @@ export default function Login({ loading, setLoading, setIsLogin }) {
           // console.log("Login successful:", data);
           setIsLogin(true);
           swal("Success", "Login successful", "success");
-          
 
           navigate("/");
         } else {
